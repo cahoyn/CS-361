@@ -22,7 +22,7 @@ SEARCH_PROMPT = """Search by:
 Your selection: """
 
 
-def contact():
+def main():
     conn = database.create_connection()
     database.create_table(conn)
 
@@ -43,15 +43,15 @@ def contact():
             if user_input == "1":
                 name = input("Enter name of contact to find: ")
                 contact = database.get_contact_by_name(conn, name)
-                print(f"{contact[0]} {contact[1]} {contact[2]}")
+                print(f"{contact[0]}")
             if user_input == "2":
                 email = input("Enter email of contact to find: ")
                 contact = database.get_contact_by_email(conn, email)
-                print(f"{contact[0]} {contact[1]} {contact[2]}")
-            if user_input == "1":
+                print(f"{contact[0]}")
+            if user_input == "3":
                 phone = input("Enter phone number of contact to find: ")
                 contact = database.get_contact_by_phone(conn, phone)
-                print(f"{contact[0]} {contact[1]} {contact[2]}")
+                print(f"{contact[0]}")
         elif user_input == "4":
             name = input("Enter the current name of the contact you'd like to update: ")
             new_name = input("Enter the updated information. Name: ")
@@ -68,4 +68,4 @@ def contact():
     conn.close()
 
 
-contact()
+main()
