@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contacts</title>
+        <h1>Contacts</h1>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/main.js')}}"></script>
+    </head>
+    <body>
+        <table border = 3>
+            <thead>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Phone</td>
+            </thead>
+            {% for row in rows %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <!-- REMOVE CONTACTS BUTTON -->
+        <div id="remove_contacts">
+            <form action="/remove_contacts" method="POST">
+                <input type="submit" value="REMOVE CONTACT">
+            </form>
+        </div>
+        <!-- ADD CONTACTS BUTTON -->
+        <div id="add_contact">
+            <form action="/enternew" method="POST">
+                <input type="submit" value="ADD CONTACT">
+            </form>
+        </div>
+    </body>
+</html>
