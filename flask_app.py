@@ -1,9 +1,12 @@
+# Author: Nathan Cahoy
+# Date: 2/26/2023
+# Class: CS361
+# Description: Example UI for partner's term project. Uses Flask with database.py to make changes to
+# contacts.db via html. Currently capable of adding and deleting contacts.
+
 import sqlite3
 from flask import Flask, render_template, request, g
 import database
-
-
-CREATE_CONTACTS_TABLE = "CREATE TABLE if not exists contacts (name TEXT PRIMARY KEY, email TEXT, phone TEXT);"
 
 
 app = Flask(__name__)
@@ -26,12 +29,12 @@ def remove_contacts():
     return render_template("remove.html")
 
 
-@app.route("/enternew", methods = ["POST", "GET"])
+@app.route("/enter_new", methods=["POST", "GET"])
 def new_contact():
     return render_template("contact.html")
 
 
-@app.route('/addcon', methods = ["POST", "GET"])
+@app.route('/addcon', methods=["POST", "GET"])
 def addcon():
     con = database.create_connection()
     database.create_table(con)
@@ -52,7 +55,7 @@ def addcon():
             return render_template("result.html", msg=msg)
 
 
-@app.route("/delete_con", methods=["POST", "GET", "DELETE"])
+@app.route("/delete_con", methods=["POST", "GET"])
 def delete_con():
     con = database.create_connection()
     if request.method == 'POST':
@@ -66,13 +69,6 @@ def delete_con():
             msg = "Error in delete operation"
         finally:
             return render_template("result.html", msg=msg)
-
-
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
 
 
 if __name__ == '__main__':
