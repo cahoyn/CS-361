@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<HTML>
+    <head>
+        <Title>Remove Contact</Title>
+        <h1>Remove Contact</h1>
+        <h3>Enter the name of the contact you'd like to remove:</h3>
+    </head>
+    <body>
+        <form action = "{{ url_for('delete_con') }}" method="POST">
+            Name<br>
+            <input type = "text" name = "name" /></br>
+            <input type = "submit" value = "Submit" /><br>
+        </form>
+    </body>
+</HTML>
