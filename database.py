@@ -1,4 +1,11 @@
+# Author: Nathan Cahoy
+# Date: 2/26/2023
+# Class: CS361
+# Description: Microservice for partner's term project. Uses Python's built-in sqlite3 functionality to
+# create a database and to create, read, update, and delete contacts from the database.
+
 import sqlite3
+
 
 print("Contacts Database Program initializing...")
 print("-" * 50)
@@ -17,7 +24,7 @@ def create_connection():
     """Create a database connection"""
     conn = None
     try:
-        conn = sqlite3.connect('contacts.db')
+        conn = sqlite3.connect('contacts.db', check_same_thread=False)
     except sqlite3.Error as e:
         print(e)
 
@@ -73,5 +80,3 @@ def get_contact_by_phone(conn, phone):
     """Read specific contact information"""
     with conn:
         return conn.execute(GET_CONTACT_BY_PHONE, (phone,)).fetchall()
-
-
